@@ -168,9 +168,6 @@ registerBlockType('cgb/block-rs-block', {
 		};
 
 
-
-
-
 		return (
 
 
