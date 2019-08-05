@@ -1,0 +1,51 @@
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * #.# Styles
+ *
+ * CSS for both Frontend+Backend.
+ */
+.wp-block-cgb-block-rs-block {
+  background: #a0251f;
+  border: 0.2rem solid #292929;
+  color: #292929;
+  margin: 0 auto;
+  max-width: 740px;
+  padding: 2rem; }
+  .wp-block-cgb-block-rs-block.is-style-default {
+    background: #f4f4f4; }
+  .wp-block-cgb-block-rs-block.is-style-red {
+    background: #a0251f;
+    color: #f4f4f4; }
+  .wp-block-cgb-block-rs-block.is-style-blue {
+    background: #2196F3;
+    color: #f4f4f4; }
+  .wp-block-cgb-block-rs-block section {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    z-index: 2; }
+    .wp-block-cgb-block-rs-block section .parallax {
+      z-index: 0;
+      background-color: transparent; }
+    .wp-block-cgb-block-rs-block section .parallax .full-bg-image, .wp-block-cgb-block-rs-block section .parallax .parallax-overlay {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-repeat: repeat; }
+    .wp-block-cgb-block-rs-block section .parallax .full-bg-image {
+      z-index: -1;
+      background-position: 50% 50%;
+      background-attachment: fixed;
+      background-size: cover; }
+    .wp-block-cgb-block-rs-block section .parallax .parallax-overlay {
+      z-index: 0;
+      margin: 0 auto;
+      /* background-image: url(../images/overlay-pattern.png); */
+      background-color: rgba(65, 25, 35, 0.3); }
