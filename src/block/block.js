@@ -82,6 +82,14 @@ registerBlockType('cgb/block-rs-block', {
 		layerColor:{
 			type: 'string',
 			default: 'rgba(21,186,200,0.6)'
+		},
+		visibleLayer:{
+			type: 'Boolean',
+			default: true
+		},
+		img_background:{
+			type: 'Bolean',
+			default: true
 		}
 	},
 
@@ -98,7 +106,7 @@ registerBlockType('cgb/block-rs-block', {
 		// Creates a <p class='wp-block-cgb-block-rs-block'></p>.
 
 		const {
-			visibleOnMobile,
+			img_background,
 			profileBackgroundColor,
 			visibleLayer,
 			layerColor,
@@ -197,10 +205,10 @@ registerBlockType('cgb/block-rs-block', {
 					<MyColorPicker></MyColorPicker>
 
 					<ToggleControl
-						label={__('Mobile Devices Visibity')}
-						checked={!!visibleOnMobile}
-						onChange={() => setAttributes({ visibleOnMobile: !visibleOnMobile })}
-						help={!!visibleOnMobile ? __('Showing on mobile devices.') : __('Hidden on mobile devices.')}
+						label={__('Mostrar Imagen de Fondo')}
+						checked={!!img_background}
+						onChange={() => setAttributes({ img_background: !img_background })}
+						help={!!img_background ? __('Mostrar Background de Imgen.') : __('Ocultar Background de Imagen.')}
 					/>
 
 					<ToggleControl
