@@ -237,6 +237,8 @@ registerBlockType('cgb/block-rs-block', {
 					formattingControls={['bold', 'italic', 'underline']}
 					isSelected={attributes.isSelected}
 					style = {{ color: layerColor }}
+
+
 				/>
 
 				<InnerBlocks /> 
