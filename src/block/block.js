@@ -266,11 +266,13 @@ registerBlockType('cgb/block-rs-block', {
 	 */
 	save: function (props) {
 
+		// Falta Trabajar en esta seccion
+
 		
 		return (
 			<section className={props.className}>
-				
 				<InnerBlocks.Content />
+				<div>clear</div>
 			</section>
 		);
 	},
