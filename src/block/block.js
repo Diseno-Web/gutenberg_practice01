@@ -134,7 +134,8 @@ registerBlockType('cgb/block-rs-block', {
 				<ColorPicker
 					color={layerColor}
 					value={layerColor}
-					onChangeComplete={(value) => setAttributes( { layerColor: value.hex } )}
+					/* onChangeComplete={(value) => setAttributes( { layerColor: value.hex } )} */
+					onChangeComplete={ ( color ) => onChangeMyColorPicker( color ) }
 				/>
 			);
 		});
@@ -144,11 +145,19 @@ registerBlockType('cgb/block-rs-block', {
 		function onChangeBackgroundColor(event) {
 
 			attributes.profileBackgroundColor = event
+			console.log(event.hex)
+		}		
 
-			console.log(event.rgba)
+		function onChangeMyColorPicker(value){
+			var xcolor = 'rgba(' + value.rgb.r + ',' + value.rgb.g + ',' + value.rgb.b + ',' + value.rgb.a + ')';
+			setAttributes( { layerColor: xcolor } )
 
-		};
+			console.log("nuevo color rgba => " + 'rgba(' + value.rgb.r + ',' + value.rgb.g + ',' + value.rgb.b + ',' + value.rgb.a + ')')
+			console.log(xcolor);
 
+			
+
+		}
 
 
 		const getImageButton = (openEvent) => {
@@ -175,16 +184,37 @@ registerBlockType('cgb/block-rs-block', {
 			}
 		};
 
-
+		
 		return (
 
 
-			<div className={ className }>
+			<div className={ className } >
 				<MediaUpload
 					onSelect={media => { setAttributes({ imageAlt: media.alt, imageUrl: media.url }); }}
 					type="image"
 					value={attributes.imageID}
 					render={({ open }) => getImageButton(open)}
+				/>
+
+				<PlainText
+					onChange={content => setAttributes({ title: content })}
+					value={attributes.title}
+					placeholder="Your card title"
+					keepPlaceholderOnFocus="true"
+					className="heading"
+				/>
+
+				<RichText
+					onChange={content => setAttributes({ body: content })}
+					value={attributes.body}
+					multiline="p"
+					placeholder="Your card text"
+					keepPlaceholderOnFocus="true"
+					formattingControls={['bold', 'italic', 'underline']}
+					isSelected={attributes.isSelected}
+					style = {{ color: layerColor }}
+
+
 				/>
 
 				<InspectorAdvancedControls>
@@ -220,26 +250,7 @@ registerBlockType('cgb/block-rs-block', {
 
 				</InspectorAdvancedControls>
 
-				<PlainText
-					onChange={content => setAttributes({ title: content })}
-					value={attributes.title}
-					placeholder="Your card title"
-					keepPlaceholderOnFocus="true"
-					className="heading"
-				/>
 
-				<RichText
-					onChange={content => setAttributes({ body: content })}
-					value={attributes.body}
-					multiline="p"
-					placeholder="Your card text"
-					keepPlaceholderOnFocus="true"
-					formattingControls={['bold', 'italic', 'underline']}
-					isSelected={attributes.isSelected}
-					style = {{ color: layerColor }}
-
-
-				/>
 
 				<InnerBlocks /> 
 			</div>
@@ -266,13 +277,29 @@ registerBlockType('cgb/block-rs-block', {
 	 */
 	save: function (props) {
 
-		// Falta Trabajar en esta seccion
-
+		var bg = props.attributes.imageUrl;
+		var color_layer = props.attributes.layerColor
+		var divoverlay, divparallax
+		
+		if(props.attributes.img_background){
+			console.log ("visible");
+			divparallax=<div class="full-bg-image" style ={ { backgroundImage: "url("+bg+")" } }></div>;
+		}else{
+			divparallax=<div class="grs-bg-img" style ={ { backgroundImage: "url("+bg+")" } }></div>;
+		}		
+		if(props.attributes.visibleLayer){
+			console.log ("visible");
+			divoverlay=<div class="parallax-overlay" style ={ { backgroundColor: color_layer } }></div>;
+		}
 		
 		return (
-			<section className={props.className}>
-				<InnerBlocks.Content />
-				<div>clear</div>
+			<section className={ 'parallax ' + props.className } >
+				{divparallax}
+				{divoverlay}
+
+					<InnerBlocks.Content />
+
+
 			</section>
 		);
 	},
